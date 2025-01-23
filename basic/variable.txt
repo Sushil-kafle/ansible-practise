@@ -1,0 +1,23 @@
+
+#local variable
+vars:
+ - var: value
+
+#global variable
+vars_files:
+  - myvars.yaml
+
+#runtime variable
+ansible-playbook 1.yaml --check  --extra-vars "mypkg=apache2"
+
+# /etc/ansible/group_vars
+# /etc/ansible/host_vars
+
+
+
+
+presendence of variable
+1. runtime variable
+2. local variable
+3. host variable
+4. group variable

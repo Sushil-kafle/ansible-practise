@@ -1,0 +1,6 @@
+roles splits ansible playbook's play section like: target,
+vars,tasks,handlers,meta into seperate folder.
+- it helps to achieve readability and modularity
+- we can use ansible-galaxy to create roles
+
+ansible-galaxy role init project1

@@ -1,0 +1,24 @@
+---
+- name: Configure Web Server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install apache
+      ansible.builtin.package:
+        name: httpd
+        state: present
+
+      notify: Restart service
+
+    - name: Copy website
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html
+
+  
+  handlers:
+    - name: Restart service
+      ansible.builtin.service:
+        name: httpd
+        state: started

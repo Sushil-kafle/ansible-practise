@@ -1,0 +1,14 @@
+---
+- name: Async playbook
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Sleep
+      ansible.builtin.command:
+        cmd: sleep 30
+      register: output
+      changed_when: output.rc != 0
+
+      async: 10 # run in parallel with timeout of 10 sec
+      poll: 5 # poll every 5 second

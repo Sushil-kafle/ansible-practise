@@ -1,0 +1,26 @@
+---
+- name: Managing packages
+  hosts: node1
+  become: true
+
+  vars:
+    mypkg: apache2
+
+  tasks:
+    - name: Install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+
+    - name: Install apache2
+      ansible.builtin.apt:
+        name: "{{ mypkg }}"
+        state: present
+      notify: Restart apache server
+
+
+  handlers:
+    - name: Restart apache server
+      ansible.builtin.service:
+        name: "{{ mypkg }}"
+        state: restarted

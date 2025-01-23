@@ -1,0 +1,68 @@
+#install ansible (control-node) #192.168.209.110
+sudo apt update
+sudo apt install ansible
+
+#ceate private-public key pair (control-node) #192.168.209.110
+ssh keygen :- write path as /home/susil/.ssh/ansible
+
+#copy public key to remote server(control-node) #192.168.209.110
+ssh-copy-id -i ~/.ssh/ansible.pub susil@192.168.209.111
+ssh-copy-id -i ~/.ssh/ansible.pub susil@192.168.209.112
+
+#on windows
+type ./id_rsa.pub | ssh susil@192.168.209.112 "cat >> .ssh/authorized_keys"
+
+
+#make private key as default key for ssh(control node) ##192.168.209.110
+add this to ssh_config: IdentityFile /home/myuser/.ssh/ansible
+
+
+#create inventory.ini file to list servers 
+nano inventory.ini
+
+#add server info to inventory.ini file
+susil@192.168.209.111
+
+#run ad-hoc ping module to test connection
+ansible -i inventory.ini -m ping all
+
+#run as sudo user 
+ansible -i inventory.ini -m shell -a "sudo apt update" app -b --ask-become-pass
+
+
+#copy file from control node to managed node
+ansible -i inventory.ini -m copy -a "src=testfile dest=/tmp/test.txt" app
+
+
+#install file in managed node
+ansible -i inventory.ini -m apt -a "name=git state=present" app -b --ask-become-pass
+
+state=present|absent|latest
+
+#manage service in managed node
+ansible -i inventory.ini -m service -a "name=apache2 state=started" app -b --ask-become-pass
+
+state=started|stopped|restarted
+
+
+#add user in managed node
+ansible -i inventory.ini -m user -a "name=new_user state=present" app -b --ask-become-pass
+
+state=present|absent|latest
+
+#run os command
+ansible -i inventory.ini -m command -a "ls" all
+ansible -i inventory.ini -m command -a "whoami" all
+
+ansible -i inventory.ini -m shell -a "ls" all
+ansible -i inventory.ini -m shell -a "whoami" all
+
+#command is default module , shell allow redirection of output
+
+
+#to set sudo pass as env
+export ANSIBLE_BECOME_PASS='your_sudo_password'
+
+
+#set config file
+export ANSIBLE_CONFIG=/mnt/c/Users/Ripple/Desktop/devops/ansible/config.cfg

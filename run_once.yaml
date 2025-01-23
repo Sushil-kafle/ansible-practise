@@ -1,0 +1,12 @@
+- name: Run once
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Print
+      ansible.builtin.command:
+        cmd: echo home
+      register: output
+      changed_when: output.rc != 0
+      run_once: true

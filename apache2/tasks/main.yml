@@ -1,0 +1,12 @@
+---
+# tasks file for project1
+- name: Install git
+  ansible.builtin.apt:
+    name: git
+    state: present
+
+- name: Install apache2
+  ansible.builtin.apt:
+    name: "{{ pkg }}"
+    state: absent
+  notify: Restart apache server

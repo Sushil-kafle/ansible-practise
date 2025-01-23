@@ -1,0 +1,20 @@
+---
+- name: <name>
+  hosts: <host>
+  become: <yes|no>
+  connection: <ssh|winrm|local>
+  
+
+ansible-playbook 1.yaml --check 
+
+ansible-playbook 1.yaml --check  --extra-vars "mypkg=apache2"
+
+
+
+#for displaying outputs as well
+ansible-playbook 1.yaml --check -v (upto 4 v)
+
+#target section
+#variable section
+#tasks section
+#handlers section

@@ -1,0 +1,20 @@
+---
+- name: Playbook to run web server
+  hosts: group1
+  become: true
+
+  vars_files:
+    var.yaml
+
+  tasks:
+    - name: Install web server
+      ansible.builtin.apt:
+        name: "{{ server }}"
+        state: present
+      notify: Restart server
+
+  handlers:
+    - name: Restart server
+      ansible.builtin.service:
+        name: "{{ server }}"
+        state: restarted

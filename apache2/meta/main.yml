@@ -1,0 +1,12 @@
+galaxy_info:
+  author: "susil kafle"  # Ensure the name is correctly formatted and valid.
+  description: "student"
+  company: "N/A"  # Use "N/A" or an appropriate placeholder for no company.
+  license: "Apache-2.0"  # Ensure the license is from the SPDX list.
+  min_ansible_version: "2.1"  # Ensure the version is a string.
+
+  # Uncomment and provide a value if you have an issue tracker URL.
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  # Uncomment and provide a version if this is a Container Enabled role.
+  # min_ansible_container_version:

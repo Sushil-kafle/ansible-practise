@@ -1,0 +1,17 @@
+---
+- name: Handeling output
+  hosts: node1
+  become: true
+
+  tasks:
+    - name: Echo output
+      ansible.builtin.command:
+        cmd: echo hello
+      register: output
+      changed_when: output.rc != 0
+
+    - name: Debug output
+      ansible.builtin.debug:
+        # var: output
+        # var: output.rc
+        var: output.stdout
