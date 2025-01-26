@@ -1,0 +1,16 @@
+---
+- name: Ansible Output
+  hosts: localhost
+
+  vars:
+    a: "hello"
+    b: "world"
+
+  tasks:
+    - name: Output to console
+      ansible.builtin.debug:
+        msg: "{{ b }}"
+
+    - name: Output variabes
+      ansible.builtin.debug:
+        var: a

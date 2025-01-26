@@ -1,0 +1,9 @@
+---
+- name: Practice ansible
+  become: true
+  hosts: localhost
+
+  tasks:
+    - name: Display Facts
+      ansible.builtin.debug:
+        var: ansible_facts
